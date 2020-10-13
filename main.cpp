@@ -6,10 +6,13 @@ vector<double> generateUDM(int, int);
 vector<double> generateXDM(int, vector<double>);
 vector<int> generateSlots(double, vector<double>);
 vector<int> generateArrivalT(vector<int>);
+void simulate_SCD_CSMACA(vector<int>);
+void simulate_HT_CSMACA(vector<int>);
+void simulate_SCD_CSMACA_VCS(vector<int>);
+void simulate_HT_CSMACA_VCS(vector<int>);
 
 int main()
 {
-    //cout << "Hello world!" << endl;
     vector<double> udm = generateUDM(2, 5);
     vector<double> xdm = generateXDM(2, udm);
     vector<int> slots = generateSlots(0.00001, xdm);
@@ -85,4 +88,20 @@ vector<int> generateArrivalT(vector<int> slots){
         arrivalTimes.push_back(temp);
     }
     return arrivalTimes;
+}
+
+void simulate_SCD_CSMACA(vector<int>){
+
+}
+
+void simulate_HT_CSMACA(vector<int>){
+
+}
+
+void simulate_SCD_CSMACA_VCS(vector<int>){
+
+}
+
+void simulate_HT_CSMACA_VCS(vector<int>){
+
 }

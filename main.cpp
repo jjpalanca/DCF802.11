@@ -5,6 +5,7 @@ using namespace std;
 vector<double> generateUDM(int, int);
 vector<double> generateXDM(int, vector<double>);
 vector<int> generateSlots(double, vector<double>);
+vector<int> generateArrivalT(vector<int>);
 
 int main()
 {
@@ -12,6 +13,8 @@ int main()
     vector<double> udm = generateUDM(2, 5);
     vector<double> xdm = generateXDM(2, udm);
     vector<int> slots = generateSlots(0.00001, xdm);
+    vector<int> arrivalT = generateArrivalT(slots);
+
     cout << "This is the UDM:" << endl;
     for (double num: udm){
         cout << num << endl;
@@ -21,9 +24,16 @@ int main()
         cout << num << endl;
     }
 
-    cout << "\This is the generated slots:" << endl;
+    cout << "\nThis is the generated slots:" << endl;
     for(int num: slots)
         cout << num << endl;
+
+
+    cout << "\nThese are the arrival times: " << endl;
+    for(int num: arrivalT){
+        cout << num << endl;
+    }
+
     return 0;
 }
 
@@ -62,4 +72,17 @@ vector<int> generateSlots(double slotDur, vector<double> xdm){
         timeSlots.push_back(slot);
     }
     return timeSlots;
+}
+
+vector<int> generateArrivalT(vector<int> slots){
+    vector<int> arrivalTimes;
+
+    int temp = slots[0];
+    arrivalTimes.push_back(temp);
+
+    for(int i = 1; i < slots.size(); i++){
+        temp += slots[i];
+        arrivalTimes.push_back(temp);
+    }
+    return arrivalTimes;
 }

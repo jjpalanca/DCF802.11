@@ -112,6 +112,8 @@ unordered_map<string, int> simulate_SCD_CSMACA(vector<int> A, vector<int> C){
     int coll_C_ctr;
     int fair_index;
 
+
+
     return result;
 }
 

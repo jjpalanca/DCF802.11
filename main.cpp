@@ -2,14 +2,27 @@
 
 using namespace std;
 
+const int DATA_FRAME_SIZE = 50;
+const double SLOT_DURATION = 0.00001;
+const int SIFS = 1;
+const int CW_MIN = 4;
+const int CW_MAX = 1024;
+const int ACK= 2;
+const int RTS = 2;
+const int CTS = 2;
+const int DIFS = 2;
+const int XMISSION_RATE = 24000000;
+const int SIMULATION_TIME = 10;
+const vector<int> LAMBDA {200, 300, 500, 1000, 2000};
+
 vector<double> generateUDM(int, int);
 vector<double> generateXDM(int, vector<double>);
 vector<int> generateSlots(double, vector<double>);
 vector<int> generateArrivalT(vector<int>);
-unordered_map<string, auto> simulate_SCD_CSMACA(vector<int>, vector<int>);
-unordered_map<string, auto> simulate_HT_CSMACA(vector<int>, vector<int>);
-unordered_map<string, auto> simulate_SCD_CSMACA_VCS(vector<int>, vector<int>);
-unordered_map<string, auto> simulate_HT_CSMACA_VCS(vector<int>, vector<int>);
+unordered_map<string, int> simulate_SCD_CSMACA(vector<int>, vector<int>);
+unordered_map<string, int> simulate_HT_CSMACA(vector<int>, vector<int>);
+unordered_map<string, int> simulate_SCD_CSMACA_VCS(vector<int>, vector<int>);
+unordered_map<string, int> simulate_HT_CSMACA_VCS(vector<int>, vector<int>);
 
 int main()
 {
@@ -90,23 +103,50 @@ vector<int> generateArrivalT(vector<int> slots){
     return arrivalTimes;
 }
 
-unordered_map<string, auto> simulate_SCD_CSMACA(vector<int> A, vector<int> C){
-    unordered_map<string, auto> result;
+unordered_map<string, int> simulate_SCD_CSMACA(vector<int> A, vector<int> C){
+    unordered_map<string, int> result;
     int SLOTTED_TIME;
+    int tp_A;
+    int tp_C;
+    int coll_A_ctr;
+    int coll_C_ctr;
+    int fair_index;
 
+    return result;
 }
 
-unordered_map<string, auto> simulate_HT_CSMACA(vector<int A, vector<int> C>){
-    unordered_map<string, auto> result;
+unordered_map<string, int> simulate_HT_CSMACA(vector<int> A, vector<int> C){
+    unordered_map<string, int> result;
     int SLOTTED_TIME;
+    int tp_A;
+    int tp_C;
+    int coll_A_ctr;
+    int coll_C_ctr;
+    int fair_index;
+
+    return result;
 }
 
-unordered_map<string, auto> simulate_SCD_CSMACA_VCS(vector<int> A, vector<int> C){
-    unordered_map<string, auto> result;
+unordered_map<string, int> simulate_SCD_CSMACA_VCS(vector<int> A, vector<int> C){
+    unordered_map<string, int> result;
     int SLOTTED_TIME;
+    int tp_A;
+    int tp_C;
+    int coll_A_ctr;
+    int coll_C_ctr;
+    int fair_index;
+
+    return result;
 }
 
-unordered_map<string, auto> simulate_HT_CSMACA_VCS(vector<int> A, vector<int> C){
-    unordered_map<string, auto> result;
+unordered_map<string, int> simulate_HT_CSMACA_VCS(vector<int> A, vector<int> C){
+    unordered_map<string, int> result;
     int SLOTTED_TIME;
+    int tp_A;
+    int tp_C;
+    int coll_A_ctr;
+    int coll_C_ctr;
+    int fair_index;
+
+    return result;
 }

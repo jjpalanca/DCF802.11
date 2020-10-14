@@ -6,10 +6,10 @@ vector<double> generateUDM(int, int);
 vector<double> generateXDM(int, vector<double>);
 vector<int> generateSlots(double, vector<double>);
 vector<int> generateArrivalT(vector<int>);
-void simulate_SCD_CSMACA(vector<int>);
-void simulate_HT_CSMACA(vector<int>);
-void simulate_SCD_CSMACA_VCS(vector<int>);
-void simulate_HT_CSMACA_VCS(vector<int>);
+unordered_map<string, auto> simulate_SCD_CSMACA(vector<int>, vector<int>);
+unordered_map<string, auto> simulate_HT_CSMACA(vector<int>, vector<int>);
+unordered_map<string, auto> simulate_SCD_CSMACA_VCS(vector<int>, vector<int>);
+unordered_map<string, auto> simulate_HT_CSMACA_VCS(vector<int>, vector<int>);
 
 int main()
 {
@@ -90,18 +90,23 @@ vector<int> generateArrivalT(vector<int> slots){
     return arrivalTimes;
 }
 
-void simulate_SCD_CSMACA(vector<int>){
+unordered_map<string, auto> simulate_SCD_CSMACA(vector<int> A, vector<int> C){
+    unordered_map<string, auto> result;
+    int SLOTTED_TIME;
 
 }
 
-void simulate_HT_CSMACA(vector<int>){
-
+unordered_map<string, auto> simulate_HT_CSMACA(vector<int A, vector<int> C>){
+    unordered_map<string, auto> result;
+    int SLOTTED_TIME;
 }
 
-void simulate_SCD_CSMACA_VCS(vector<int>){
-
+unordered_map<string, auto> simulate_SCD_CSMACA_VCS(vector<int> A, vector<int> C){
+    unordered_map<string, auto> result;
+    int SLOTTED_TIME;
 }
 
-void simulate_HT_CSMACA_VCS(vector<int>){
-
+unordered_map<string, auto> simulate_HT_CSMACA_VCS(vector<int> A, vector<int> C){
+    unordered_map<string, auto> result;
+    int SLOTTED_TIME;
 }

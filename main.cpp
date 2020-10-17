@@ -1,9 +1,10 @@
-#include <iostream>
+#include <bits/stdc++.h>
+/*#include <iostream>
 #include <vector>
 #include <unordered_map>
 #include <time.h>
 #include <algorithm>
-#include <math.h>
+#include <math.h>*/
 
 using namespace std;
 
@@ -26,24 +27,25 @@ vector<int> generateSlots(double, vector<double>);
 vector<int> generateArrivalT(vector<int>);
 int generateBackoff(int);
 unordered_map<string, double> simulate_SCD_CSMACA(vector<int>, vector<int>);
-unordered_map<string, int> simulate_HT_CSMACA(vector<int>, vector<int>);
-unordered_map<string, int> simulate_SCD_CSMACA_VCS(vector<int>, vector<int>);
+unordered_map<string, double> simulate_HT_CSMACA(vector<int>, vector<int>);
+unordered_map<string, double> simulate_SCD_CSMACA_VCS(vector<int>, vector<int>);
 unordered_map<string, double> simulate_HT_CSMACA_VCS(vector<int>, vector<int>);
 
 int main()
 {
 	srand((unsigned)time(0));
 
+	for(int x :LAMBDA){
 	// generate arrival time for A
-	vector<double> udm1 = generateUDM(200, 10);
-	vector<double> xdm1 = generateXDM(200, udm1);
-	vector<int> slots1 = generateSlots(0.00001, xdm1);
+	vector<double> udm1 = generateUDM(x, SIMULATION_TIME);
+	vector<double> xdm1 = generateXDM(x, udm1);
+	vector<int> slots1 = generateSlots(SLOT_DURATION, xdm1);
 	vector<int> A = generateArrivalT(slots1);
 
 	// generate arrival time for C
-	vector<double> udm2 = generateUDM(200, 10);
-	vector<double> xdm2 = generateXDM(200, udm2);
-	vector<int> slots2 = generateSlots(0.00001, xdm2);
+	vector<double> udm2 = generateUDM(x, SIMULATION_TIME);
+	vector<double> xdm2 = generateXDM(x, udm2);
+	vector<int> slots2 = generateSlots(SLOT_DURATION, xdm2);
 	vector<int> C = generateArrivalT(slots2);
 
 	//    cout << "This is the UDM:" << endl;
@@ -67,17 +69,17 @@ int main()
 
 	//    vector<int>A{100, 200};
 	//    vector<int>C{150, 250};
-	
-	
 
-	unordered_map<string, double> SCD_CSMACA = simulate_SCD_CSMACA(A, C);
+
+
+    unordered_map<string, double> SCD_CSMACA = simulate_SCD_CSMACA(A, C);
 	cout << "Output for SCD_CSMACA: " << endl;
-	for (auto x : SCD_CSMACA) {
+	for (auto  x : SCD_CSMACA) {
 		if (x.first == "ThroughputA" or x.first == "ThroughputC") {
-			cout << &x.first << ": " << (int)&x.second << endl;
+			cout << x.first << ": " << (int)x.second << endl;
 		}
 		else {
-			cout << &x.first << ": " << &x.second << endl;
+			cout << x.first << ": " << x.second << endl;
 		}
 	}
 
@@ -87,14 +89,39 @@ int main()
 	cout << "Output for HT_CSMACA_VCS: " << endl;
 	for (auto x : HT_CSMACA_VCS) {
 		if (x.first == "ThroughputA" or x.first == "ThroughputC") {
-			cout << &x.first << ": " << (int)&x.second << endl;
+			cout << x.first << ": " << (int)x.second << endl;
 		}
 		else {
-			cout << &x.first << ": " << &x.second << endl;
+			cout << x.first << ": " << x.second << endl;
 		}
 	}
 	cout << endl;
 
+		unordered_map<string, double> HT_CSMACA = simulate_HT_CSMACA(A, C);
+	cout << "Output for HT_CSMACA: " << endl;
+	for (auto x : HT_CSMACA) {
+		if (x.first == "ThroughputA" or x.first == "ThroughputC") {
+			cout << x.first << ": " << (int)x.second << endl;
+		}
+		else {
+			cout << x.first << ": " << x.second << endl;
+		}
+	}
+	cout << endl;
+
+		unordered_map<string, double> SCD_CSMACA_VCS = simulate_SCD_CSMACA_VCS(A, C);
+	cout << "Output for SCD_CSMACA_VCS: " << endl;
+	for (auto x : SCD_CSMACA_VCS) {
+		if (x.first == "ThroughputA" or x.first == "ThroughputC") {
+			cout << x.first << ": " << (int)x.second << endl;
+		}
+		else {
+			cout << x.first << ": " << x.second << endl;
+		}
+	}
+	cout << endl;
+
+	}
 	return 0;
 }
 
@@ -390,14 +417,14 @@ unordered_map<string, double> simulate_SCD_CSMACA(vector<int> A, vector<int> C) 
 }
 
 
-unordered_map<string, int> simulate_HT_CSMACA(vector<int> A, vector<int> C) {
-	unordered_map<string, int> result;
+unordered_map<string, double> simulate_HT_CSMACA(vector<int> A, vector<int> C) {
+	unordered_map<string, double> result;
 	int SLOTTED_TIME;
 	int tp_A;
 	int tp_C;
 	int coll_A_ctr;
 	int coll_C_ctr;
-	int fair_index;
+	double fair_index;
 
 	int backOff_A;
 	int backOff_C;
@@ -603,9 +630,9 @@ START:while (SLOTTED_TIME < simul_slots) {
 //cout << "Coll_Count_A " << coll_A_ctr << endl;
 //cout << "Coll_Count_C " << coll_C_ctr << endl;
 //cout << "total frames " << SLOTTED_TIME << endl;
-fair_index = tp_A / tp_C;
+fair_index = (double)tp_A / tp_C;
 tp_A = tp_A * 12000 / 10;
-tp_A = tp_C * 12000 / 10;
+tp_C = tp_C * 12000 / 10;
 
 result["ThroughputA"] = (double)tp_A;
 result["ThroughputC"] = (double)tp_C;
@@ -616,14 +643,14 @@ result["FairIndex"] = fair_index;
 	  return result;
 }
 
-unordered_map<string, int> simulate_SCD_CSMACA_VCS(vector<int> A, vector<int> C) {
-	unordered_map<string, int> result;
+unordered_map<string, double> simulate_SCD_CSMACA_VCS(vector<int> A, vector<int> C) {
+	unordered_map<string, double> result;
 	int SLOTTED_TIME;
 	int tp_A;
 	int tp_C;
 	int coll_A_ctr;
 	int coll_C_ctr;
-	int fair_index;
+	double fair_index;
 
 	int nav_RTS = 0;
 	int nav_CTS = 0;
@@ -755,9 +782,9 @@ START:while (SLOTTED_TIME < simul_slots) {
 	  //cout << "Coll_Count_A " << coll_A_ctr << endl;
 	  //cout << "Coll_Count_C " << coll_C_ctr << endl;
 	  //cout << "total frames " << SLOTTED_TIME << endl;
-fair_index = tp_A / tp_C;
+fair_index = (double)tp_A / tp_C;
 tp_A = tp_A * 12000 / 10;
-tp_A = tp_C * 12000 / 10;
+tp_C = tp_C * 12000 / 10;
 
 result["ThroughputA"] = (double)tp_A;
 result["ThroughputC"] = (double)tp_C;
